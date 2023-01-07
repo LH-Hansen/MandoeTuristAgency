@@ -169,13 +169,18 @@ namespace MandøOpgave
 
             int season = dagsDato.Month;
 
+            string dagPåUgen = Convert.ToString(dagsDato.DayOfWeek);
+
             if (season >= 4 && season <= 9)
             {
                 Console.WriteLine("Sommerseason: \n");
 
-                Console.WriteLine("Mandag 10:00 - 17:00");
                 for (int i = 0; i < 8 - 1; i++)
                 {
+                    if (ÅbningstiderIDag(dagPåUgen) == i)
+                    {
+                        Console.WriteLine("{0}\t\t{1} (i dag)", modtagetUgedag[i], modtagetÅbningstiderSommer[i]);
+                    }
                     Console.WriteLine("{0}\t\t{1}", modtagetUgedag[i], modtagetÅbningstiderSommer[i]);
                 }
                 Retur();
@@ -183,12 +188,48 @@ namespace MandøOpgave
             else
             {
                 Console.WriteLine("Vinterseason: \n");
+
                 for (int i = 0; i < 8 - 1; i++)
                 {
+                    if (ÅbningstiderIDag(dagPåUgen) == i)
+                    {
+                        Console.WriteLine("{0}\t\t{1} (i dag)", modtagetUgedag[i], modtagetÅbningstiderSommer[i]);
+                    }
                     Console.WriteLine("{0}\t\t{1}", modtagetUgedag[i], modtagetÅbningstiderVinter[i]);
                 }
                 Retur();
             }
+        }
+
+        static int ÅbningstiderIDag(string modtagetDagPåUgen)
+        {
+            int ugeDagInt = 10;
+
+            switch (modtagetDagPåUgen)
+            {
+                case "Monday":
+                    ugeDagInt = 0;
+                    break;
+                case "Tuesday":
+                    ugeDagInt = 1;
+                    break;
+                case "Wednesday":
+                    ugeDagInt = 2;
+                    break;
+                case "Thursday":
+                    ugeDagInt = 3;
+                    break;
+                case "Friday":
+                    ugeDagInt = 4;
+                    break;
+                case "Saturday":
+                    ugeDagInt = 5;
+                    break;
+                case "Sunday":
+                    ugeDagInt = 6;
+                    break;
+            }
+            return ugeDagInt;
         }
 
         static void PrintDagensAktiviteter(string[,] modtagetAktiviteter)
