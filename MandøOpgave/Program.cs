@@ -167,11 +167,13 @@ namespace MandøOpgave
         {
             DateTime dagsDato = DateTime.Now;
 
-            int season = Convert.ToInt32(dagsDato.Month);
+            int season = dagsDato.Month;
 
             if (season >= 4 && season <= 9)
             {
                 Console.WriteLine("Sommerseason: \n");
+
+                Console.WriteLine("Mandag 10:00 - 17:00");
                 for (int i = 0; i < 8 - 1; i++)
                 {
                     Console.WriteLine("{0}\t\t{1}", modtagetUgedag[i], modtagetÅbningstiderSommer[i]);
@@ -191,16 +193,16 @@ namespace MandøOpgave
 
         static void PrintDagensAktiviteter(string[,] modtagetAktiviteter)
         {
-            Console.WriteLine("Dagens aktiviteter\n");
-
-            DateTime dagsDato = DateTime.Now;
-
             string dag, måned, år;
             bool angivetAktiviteter = false;
+
+            DateTime dagsDato = DateTime.Now;
 
             dag = Convert.ToString(dagsDato.Day);
             måned = Convert.ToString(dagsDato.Month);
             år = Convert.ToString(dagsDato.Year);
+
+            Console.WriteLine("Dagens aktiviteter\n");
 
             Console.Write("Dagens aktivitet(er) er:\n");
 
@@ -208,7 +210,7 @@ namespace MandøOpgave
             {
                 if (modtagetAktiviteter[i, 0] != "x" && modtagetAktiviteter[i, 0] == dag && modtagetAktiviteter[i, 1] == måned && modtagetAktiviteter[i, 2] == år)
                 {
-                    Console.WriteLine("'{0}' {1} klokken {2}.", modtagetAktiviteter[i, 3], modtagetAktiviteter[i, 4], modtagetAktiviteter[i, 5]);
+                    Console.WriteLine ("'{0}' {1} klokken {2}.", modtagetAktiviteter[i, 3], modtagetAktiviteter[i, 4], modtagetAktiviteter[i, 5]);
                     angivetAktiviteter = true;
                 }
             }
@@ -334,8 +336,6 @@ namespace MandøOpgave
                     break;
                 }
             }
- 
-
         }
 
 
@@ -352,8 +352,5 @@ namespace MandøOpgave
             Console.ReadKey();
             Console.Clear();
         }
-
-        
-
     }
 }
