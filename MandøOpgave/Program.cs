@@ -175,13 +175,16 @@ namespace MandøOpgave
             {
                 Console.WriteLine("Sommerseason: \n");
 
-                for (int i = 0; i < 8 - 1; i++)
+                for (int i = 0; i <= 6 - 1; i++)
                 {
-                    if (ÅbningstiderIDag(dagPåUgen) == i)
+                    if (UgedagTilInt(dagPåUgen) == i)
                     {
                         Console.WriteLine("{0}\t\t{1} (i dag)", modtagetUgedag[i], modtagetÅbningstiderSommer[i]);
                     }
-                    Console.WriteLine("{0}\t\t{1}", modtagetUgedag[i], modtagetÅbningstiderSommer[i]);
+                    else
+                    {
+                        Console.WriteLine("{0}\t\t{1}", modtagetUgedag[i], modtagetÅbningstiderSommer[i]);
+                    }
                 }
                 Retur();
             }
@@ -189,47 +192,56 @@ namespace MandøOpgave
             {
                 Console.WriteLine("Vinterseason: \n");
 
-                for (int i = 0; i < 8 - 1; i++)
+                for (int i = 0; i <= 6 - 1; i++)
                 {
-                    if (ÅbningstiderIDag(dagPåUgen) == i)
+                    if (UgedagTilInt(dagPåUgen) == i)
                     {
-                        Console.WriteLine("{0}\t\t{1} (i dag)", modtagetUgedag[i], modtagetÅbningstiderSommer[i]);
+                        Console.WriteLine("{0}\t\t{1}\t(i dag)", modtagetUgedag[i], modtagetÅbningstiderSommer[i]);
                     }
-                    Console.WriteLine("{0}\t\t{1}", modtagetUgedag[i], modtagetÅbningstiderVinter[i]);
+                    else
+                    {
+                        Console.WriteLine("{0}\t\t{1}", modtagetUgedag[i], modtagetÅbningstiderVinter[i]);
+                    }
                 }
                 Retur();
             }
         }
 
-        static int ÅbningstiderIDag(string modtagetDagPåUgen)
+        static int UgedagTilInt(string modtagetDagPåUgen)
         {
-            int ugeDagInt = 10;
+            int ugedagInt = 10;
 
             switch (modtagetDagPåUgen)
             {
                 case "Monday":
-                    ugeDagInt = 0;
+                    ugedagInt = 0;
                     break;
+
                 case "Tuesday":
-                    ugeDagInt = 1;
+                    ugedagInt = 1;
                     break;
+
                 case "Wednesday":
-                    ugeDagInt = 2;
+                    ugedagInt = 2;
                     break;
+
                 case "Thursday":
-                    ugeDagInt = 3;
+                    ugedagInt = 3;
                     break;
+
                 case "Friday":
-                    ugeDagInt = 4;
+                    ugedagInt = 4;
                     break;
+
                 case "Saturday":
-                    ugeDagInt = 5;
+                    ugedagInt = 5;
                     break;
+
                 case "Sunday":
-                    ugeDagInt = 6;
+                    ugedagInt = 6;
                     break;
             }
-            return ugeDagInt;
+            return ugedagInt;
         }
 
         static void PrintDagensAktiviteter(string[,] modtagetAktiviteter)
