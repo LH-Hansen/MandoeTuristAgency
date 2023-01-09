@@ -10,6 +10,8 @@ namespace MandøOpgave
         {
             bool loginKorrekt = false;
 
+            string seasonSommer = "sommer";
+            string seasonVinter = "vinter";
             string brugervalg;
 
             string[] ugedag = new string[7];
@@ -23,7 +25,7 @@ namespace MandøOpgave
             SetUgedag(ugedag);
             SetÅbningstider(åbningstiderSommer, åbningstiderVinter);
             SetAktiviteter(aktiviteter);
-            
+
             while (true)
             {
                 brugervalg = HovedMenu();
@@ -47,25 +49,25 @@ namespace MandøOpgave
                         break;
                 }
 
-                while(loginKorrekt == true)
+                while (loginKorrekt == true)
                 {
                     brugervalg = PersonaleMenu();
 
                     switch (brugervalg)
                     {
-                        case"1":
-                            AdministrerÅbningstider(ugedag, åbningstiderSommer);
+                        case "1":
+                            AdministrerÅbningstider(seasonSommer, ugedag, åbningstiderSommer);
                             break;
 
                         case "2":
-                            AdministrerÅbningstider(ugedag, åbningstiderVinter);
+                            AdministrerÅbningstider(seasonVinter, ugedag, åbningstiderVinter);
                             break;
 
                         case "3":
                             OpretAktiviteter(aktiviteter);
                             break;
 
-                        case"4":
+                        case "4":
                             loginKorrekt = false;
                             break;
 
@@ -105,7 +107,7 @@ namespace MandøOpgave
             modtagetUgedag[5] = "Loerdag";
             modtagetUgedag[6] = "Soendag";
         }
-        
+
         static void SetÅbningstider(string[] modtagetSommer, string[] modtagetVinter)
         {
             modtagetSommer[0] = "10:00 - 17:00";
@@ -155,7 +157,7 @@ namespace MandøOpgave
             string personaleMenuValg;
 
             Console.Write("Personale menu\n\n1. Administrer aabningstider sommer\n2. Administrer aabningstider vinter\n3. Tilfoej aktiviteter\n4. Tilbage\n\nValg: ");
-            
+
             personaleMenuValg = Console.ReadLine();
 
             Console.Clear();
@@ -257,13 +259,11 @@ namespace MandøOpgave
 
             Console.WriteLine("Dagens aktiviteter\n");
 
-            Console.Write("Dagens aktivitet(er) er:\n");
-
             for (int i = 0; i < 365; i++)
             {
                 if (modtagetAktiviteter[i, 0] != "x" && modtagetAktiviteter[i, 0] == dag && modtagetAktiviteter[i, 1] == måned && modtagetAktiviteter[i, 2] == år)
                 {
-                    Console.WriteLine ("'{0}' {1} klokken {2}.", modtagetAktiviteter[i, 3], modtagetAktiviteter[i, 4], modtagetAktiviteter[i, 5]);
+                    Console.WriteLine("'{0}' {1} klokken {2}.", modtagetAktiviteter[i, 3], modtagetAktiviteter[i, 4], modtagetAktiviteter[i, 5]);
                     angivetAktiviteter = true;
                 }
             }
@@ -308,19 +308,17 @@ namespace MandøOpgave
                     Console.Clear();
                 }
                 else if (loginKontrol == true)
-                {
                     break;
-                }
             }
             return loginKontrol;
         }
 
-        static void AdministrerÅbningstider(string[] modtagetUgedag, string[] modtagetÅbningstider)
+        static void AdministrerÅbningstider(string season, string[] modtagetUgedag, string[] modtagetÅbningstider)
         {
             int intBrugervalg;
             string brugervalg;
 
-            Console.WriteLine("Administrer aabningstider sommer\n\nVælg hvilken tid der skal opdateres: \n");
+            Console.WriteLine("Administrer aabningstider {0}\n\nVælg hvilken tid der skal opdateres: \n", season);
 
             for (int i = 0; i < 7; i++)
             {
@@ -332,15 +330,15 @@ namespace MandøOpgave
             intBrugervalg = Convert.ToInt32(Console.ReadLine());
 
             Console.Clear();
-            Console.Write("Administrer aabningstider sommer\n\nNy aabningstid for {0}: ", modtagetUgedag[intBrugervalg - 1]);
+            Console.Write("Administrer aabningstider {0}\n\nNy aabningstid for {1}: ", season, modtagetUgedag[intBrugervalg - 1]);
 
             brugervalg = Console.ReadLine();
 
             modtagetÅbningstider[intBrugervalg - 1] = brugervalg;
 
             Console.Clear();
-            Console.WriteLine("Administrer aabningstider sommer\n");
-            Console.WriteLine("Opdateret sommerseason: \n");
+            Console.WriteLine("Administrer aabningstider {0}\n", season);
+            Console.WriteLine("Opdateret {0}season: \n", season);
 
             for (int i = 0; i < 8 - 1; i++)
             {
@@ -353,9 +351,7 @@ namespace MandøOpgave
         {
             for (int i = 0; i < modtagetAktiviteter.Length; i++)
             {
-                if (modtagetAktiviteter[i, 0] != "x")
-                { }
-                else
+                if (modtagetAktiviteter[i, 0] == "x")
                 {
                     string dato;
                     string[] datoAktivitetString;
