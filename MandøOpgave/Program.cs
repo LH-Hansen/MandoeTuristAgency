@@ -274,7 +274,6 @@ namespace MandøOpgave
             Retur();
         }
 
-
         static bool PersonaleLogin(string[,] modtagetBruger)
         {
             string brugernavn, kodeord;
@@ -390,7 +389,6 @@ namespace MandøOpgave
                 }
             }
         }
-
 
         static void Fejlmeddelelse()
         {
